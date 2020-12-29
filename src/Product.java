@@ -1,4 +1,4 @@
-public class product {
+public class Product {
     private String productID;
     private String productName;
     private String productPrice;
@@ -20,12 +20,12 @@ public class product {
         this.productName = productName;
     }
 
-    public String getProduactPrice() {
+    public String getProductPrice() {
         return productPrice;
     }
 
-    public void setProduactPrice(String produactPrice) {
-        this.productPrice = produactPrice;
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
     }
 
     public String getProductDescribe() {
@@ -35,7 +35,5 @@ public class product {
     public void setProductDescribe(String productDescribe) {
         this.productDescribe = productDescribe;
     }
-
-    public void getProductPrice(String value) {
-    }
 }
+

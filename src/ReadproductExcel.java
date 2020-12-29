@@ -9,15 +9,17 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 
 public class ReadproductExcel {
-    public product[] readExcel(InputStream in) {
-        product products[] = null;
+
+
+    public Product[] readExcel(InputStream in) {
+        Product products[] = null;
         try {
             XSSFWorkbook xw = new XSSFWorkbook(in);
             XSSFSheet xs = xw.getSheetAt(0);
-            products = new product[xs.getLastRowNum()];
+            products = new Product[xs.getLastRowNum()];
             for (int j = 1; j <= xs.getLastRowNum(); j++) {
                 XSSFRow row = xs.getRow(j);
-                product  pro = new product();//每循环一次就把电子表格的一行的数据给对象赋值
+                Product product = new Product();//每循环一次就把电子表格的一行的数据给对象赋值
                 for (int k = 0; k <= row.getLastCellNum(); k++) {
                     XSSFCell cell = row.getCell(k);
 
@@ -26,20 +28,20 @@ public class ReadproductExcel {
 
                         continue;
                     if (k == 0) {
-                        pro.setProductID(this.getValue(cell));//给username属性赋值
+                        product.setProductID(this.getValue(cell));//给username属性赋值
 
                     } else if (k == 1) {
-                        pro.setProductName(this.getValue(cell));//给password属性赋值
+                        product.setProductName(this.getValue(cell));//给password属性赋值
 
                     } else if (k == 2) {
-                        pro.getProductPrice(this.getValue(cell));//给address属性赋值
+                        product.setProductPrice(this.getValue(cell));//给address属性赋值
 
                     } else if (k == 3) {
-                        pro.setProductDescribe(this.getValue(cell));//给phone属性赋值
+                        product.setProductDescribe(this.getValue(cell));//给phone属性赋值
 
                     }
                 }
-                products[j-1] = pro;
+                products[j-1] = product;
             }
 
         } catch (IOException e) {

@@ -15,11 +15,20 @@ public class Test {
             System.out.println("你输入的密码为 :" + password);
             //File file=new File("C:\\Users\\ASUS\\IdeaProjects\\ConsoleShop\\src\\Users.xlsx");
             InputStream in = Class.forName("Test").getResourceAsStream("/Users.xlsx");
+            InputStream inpro = Class.forName("Test").getResourceAsStream("/Product.xlsx");
             ReadUsersExcel readExcel = new ReadUsersExcel();
             User Users[] = readExcel.readExcel(in);
             for (int i = 0; i < Users.length; i++) {
                 if (username.equals(Users[i].getUsername()) && password.equals(Users[i].getPassword())) {
                     System.out.println("登陆成功");
+                    ReadproductExcel readproductExcel = new ReadproductExcel ();
+                    Product products []=readproductExcel.readExcel(inpro);
+                    for(Product product:products){
+                        System.out.print(product.getProductID());
+                        System.out.print("\t"+product.getProductName());
+                        System.out.print("\t"+product.getProductPrice());
+                        System.out.println("\t"+product.getProductDescribe());
+                    }
                     bo=false;
                     break;
                 } else {
