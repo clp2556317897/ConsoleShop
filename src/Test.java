@@ -21,7 +21,7 @@ public class Test {
             for (int i = 0; i < Users.length; i++) {
                 if (username.equals(Users[i].getUsername()) && password.equals(Users[i].getPassword())) {
                     System.out.println("登陆成功");
-                    ReadproductExcel readproductExcel = new ReadproductExcel ();
+                   ReadproductExcel readproductExcel = new ReadproductExcel ();
                     Product products []=readproductExcel.readAllExcel(inpro);
                     for(Product product:products){
                         System.out.print(product.getProductID());
@@ -39,9 +39,33 @@ public class Test {
                     Product product=readproductExcel1.getProductByid(productid,inpro);
                     if(product!=null){
                         productes[count++]=product;
-
-
                     }
+                    System.out.println("查看购物车请输入数字< 1 >");
+                    System.out.println("继续购物请输入数字<  2 >");
+                    int choose=sc.nextInt();
+                    if(choose==1){
+                    for(int j=0;j<products.length;j++){
+                        if(productes[j]!=null){
+                        System.out.println("购物车中商品为;" + productes[j].getProductName());}
+                    }}else if(choose==2){
+                        readproductExcel = new ReadproductExcel ();
+                        for(Product product1:products){
+                            System.out.print(product1.getProductID());
+                            System.out.print("\t"+product1.getProductName());
+                            System.out.print("\t"+product1.getProductPrice());
+                            System.out.println("\t"+product1.getProductDescribe());
+                        }
+                        System.out.println("请输入商品ID，把该商品加入购物车:");
+                         productid=sc.next();
+                         readproductExcel1=new ReadproductExcel();
+                        inpro=null;
+                        inpro = Class.forName("Test").getResourceAsStream("/Product.xlsx");
+                        Product product1=readproductExcel1.getProductByid(productid,inpro);
+                        if(product!=null){
+                            productes[count++]=product;
+                        }
+                    }
+
                     bo=false;
                     break;
                 } else {
