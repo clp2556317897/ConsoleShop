@@ -2,6 +2,8 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class Test {
+    static int count=0;
+    static Product carts[]=new Product[3];//创建购物车
     public static void main(String[] args) throws ClassNotFoundException {
         boolean bo=true;
         while (bo) {
@@ -21,48 +23,28 @@ public class Test {
             for (int i = 0; i < Users.length; i++) {
                 if (username.equals(Users[i].getUsername()) && password.equals(Users[i].getPassword())) {
                     System.out.println("登陆成功");
-                   ReadproductExcel readproductExcel = new ReadproductExcel ();
-                    Product products []=readproductExcel.readAllExcel(inpro);
-                    for(Product product:products){
-                        System.out.print(product.getProductID());
-                        System.out.print("\t"+product.getProductName());
-                        System.out.print("\t"+product.getProductPrice());
-                        System.out.println("\t"+product.getProductDescribe());
-                    }
-                    int count=0;
-                    Product productes[]=new Product[3];//创建购物车
-                    System.out.println("请输入商品ID，把该商品加入购物车:");
-                    String productid=sc.next();
-                    ReadproductExcel readproductExcel1=new ReadproductExcel();
-                    inpro=null;
-                    inpro = Class.forName("Test").getResourceAsStream("/Product.xlsx");
-                    Product product=readproductExcel1.getProductByid(productid,inpro);
-                    if(product!=null){
-                        productes[count++]=product;
-                    }
-                    System.out.println("查看购物车请输入数字< 1 >");
-                    System.out.println("继续购物请输入数字<  2 >");
-                    int choose=sc.nextInt();
-                    if(choose==1){
-                    for(int j=0;j<products.length;j++){
-                        if(productes[j]!=null){
-                        System.out.println("购物车中商品为;" + productes[j].getProductName());}
-                    }}else if(choose==2){
-                        readproductExcel = new ReadproductExcel ();
-                        for(Product product1:products){
-                            System.out.print(product1.getProductID());
-                            System.out.print("\t"+product1.getProductName());
-                            System.out.print("\t"+product1.getProductPrice());
-                            System.out.println("\t"+product1.getProductDescribe());
+                    shopping(sc);
+                    while (true) {
+                        System.out.println("查看购物车请按1");
+                        System.out.println("继续购物请按2");
+                        System.out.println("结账请按3");
+                        System.out.println("退出请按4");
+                        int choose = sc.nextInt();
+                        if (choose==1) {
+                            for (Product product : carts) {
+                                if (product != null) {
+                                    System.out.print(product.getProductID());
+                                    System.out.print("\t" + product.getProductName());
+                                    System.out.print("\t" + product.getProductPrice());
+                                    System.out.println("\t" + product.getProductDescribe());
+                                }
+                            }
                         }
-                        System.out.println("请输入商品ID，把该商品加入购物车:");
-                         productid=sc.next();
-                         readproductExcel1=new ReadproductExcel();
-                        inpro=null;
-                        inpro = Class.forName("Test").getResourceAsStream("/Product.xlsx");
-                        Product product1=readproductExcel1.getProductByid(productid,inpro);
-                        if(product!=null){
-                            productes[count++]=product;
+                        else if(choose==2){
+                            shopping(sc);
+                        }
+                        else if(choose==4){
+                            break;
                         }
                     }
 
@@ -74,4 +56,33 @@ public class Test {
             }
         }
     }
+    public static void shopping(Scanner sc) throws ClassNotFoundException {
+        InputStream inPro = Class.forName("Test").getResourceAsStream("/product.xlsx");//  /表示的就是classpath
+        ReadproductExcel readProductExcel = new ReadproductExcel();
+        Product products[] = readProductExcel.readAllExcel(inPro);
+        for (Product product : products) {
+            System.out.print(product.getProductID());
+            System.out.print("\t" + product.getProductName());
+            System.out.print("\t\t" + product.getProductPrice());
+            System.out.println("\t\t" + product.getProductDescribe());
+        }
+                    /*
+                    遍历数组
+                     */
+
+        System.out.println("请输入商品ID，把该商品加入购物车：");
+        String pId = sc.next();
+        ReadproductExcel readProductExcel1 = new ReadproductExcel();
+        inPro = null;
+        inPro = Class.forName("Test").getResourceAsStream("/product.xlsx");//  /表示的就是classpath
+        Product product = readProductExcel1.getProductByid(pId, inPro);
+        if (product != null) {
+                        /*
+                        把商品加入购物车
+                         */
+            carts[count++] = product;
+        }
+
+    }
 }
+

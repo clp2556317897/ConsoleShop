@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="poi-4.1.2">
+    <CLASSES>
+      <root url="jar://F:/新建文件夹/consoleshop包/poi-4.1.2/poi-4.1.2.jar!/" />
+      <root url="jar://F:/新建文件夹/consoleshop包/poi-4.1.2/poi-examples-4.1.2.jar!/" />
+      <root url="jar://F:/新建文件夹/consoleshop包/poi-4.1.2/poi-excelant-4.1.2.jar!/" />
+      <root url="jar://F:/新建文件夹/consoleshop包/poi-4.1.2/poi-ooxml-4.1.2.jar!/" />
+      <root url="jar://F:/新建文件夹/consoleshop包/poi-4.1.2/poi-ooxml-schemas-4.1.2.jar!/" />
+      <root url="jar://F:/新建文件夹/consoleshop包/poi-4.1.2/poi-scratchpad-4.1.2.jar!/" />
+      <root url="jar://F:/新建文件夹/consoleshop包/poi-4.1.2/xmlbeans-3.1.0.jar!/" />
+      <root url="file://F:/新建文件夹/consoleshop包/poi-4.1.2" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://F:/新建文件夹/consoleshop包/poi-4.1.2/docs/apidocs/dev" />
+    </JAVADOC>
+    <SOURCES />
+    <jarDirectory url="file://F:/新建文件夹/consoleshop包/poi-4.1.2" recursive="false" />
+  </library>
+</component>
