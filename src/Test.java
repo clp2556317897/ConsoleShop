@@ -31,14 +31,7 @@ public class Test {
                         System.out.println("退出请按4");
                         int choose = sc.nextInt();
                         if (choose==1) {
-                            for (Product product : carts) {
-                                if (product != null) {
-                                    System.out.print(product.getProductID());
-                                    System.out.print("\t" + product.getProductName());
-                                    System.out.print("\t" + product.getProductPrice());
-                                    System.out.println("\t" + product.getProductDescribe());
-                                }
-                            }
+                            viewcarts(sc);
                         }
                         else if(choose==2){
                             shopping(sc);
@@ -83,6 +76,16 @@ public class Test {
             carts[count++] = product;
         }
 
+    }
+    public static void viewcarts(Scanner sc){
+        for (Product product : carts) {
+            if (product != null) {
+                System.out.print(product.getProductID());
+                System.out.print("\t" + product.getProductName());
+                System.out.print("\t" + product.getProductPrice());
+                System.out.println("\t" + product.getProductDescribe());
+            }
+        }
     }
 }
 
