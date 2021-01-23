@@ -36,6 +36,30 @@ public class Test {
                         else if(choose==2){
                             shopping(sc);
                         }
+                        else if(choose==3){
+                              /*
+                            1、产生订单（必须有订单类）
+                            2、用POI创建Order.xlsx文件
+                            3、把购物车里的商品写入Order.xlsx文件
+                             */
+                            Order order = new Order();
+                            order.setUser(Users[i]);//订单关联用户
+                            Product products[]=new Product[count];
+                            int num=0;
+                            /*
+                            实际买了2个商品，怎样把carts中的2个Product对象放入products
+                             */
+                            for(int j=0;j<carts.length;j++){
+                                if(carts[j]!=null){
+                                    products[j]=carts[j];
+                                }
+                            }
+                            order.setProducts(products);//订单关联商品：实际上应该进行处理，把数组中为null的去除
+                            //下订单（创建Excel）
+
+                            CreateOrder.createOrder(order);
+
+                        }
                         else if(choose==4){
                             break;
                         }
