@@ -7,12 +7,12 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
 import java.io.FileOutputStream;
+import java.util.Map;
 
 public class CreateOrder {
     public static String outputFile = "F:\\Orders.xls";
     public static void createOrder(Order order) {
         try {
-
             // 创建新的Excel 工作簿
             HSSFWorkbook workbook = new HSSFWorkbook();
             // 在Excel工作簿中建一工作表，其名为缺省值
@@ -40,9 +40,9 @@ public class CreateOrder {
             cell06.setCellValue("下单时间");
             //外循环的次数和购物车的实际长度
             for (int i = 0; i < order.getProducts().length; i++) {
-                int m=0;int n=0;
                 // 在索引0的位置创建行（最顶端的行）
                 HSSFRow row = sheet.createRow((short) i + 1);
+                int pId=Integer.parseInt(order.getProducts()[i].getProductID());
                 for (int j = 0; j < 6; j++) {
                     HSSFCell cell = row.createCell((short) j);
                     // 在单元格中输入一些内容
@@ -51,23 +51,14 @@ public class CreateOrder {
                         cell.setCellValue(order.getUser().getUsername());
                         //cell.setCellStyle(style);//设置背景色
                     } else if (j == 1) {
-                        cell.setCellValue(order.getProducts()[i].getProductID());
+                        cell.setCellValue(pId);
                     }else if(j==2){
-                        if(Integer.parseInt(order.getProducts()[i].getProductID())==(1111)){
-                           m++;
-                            cell.setCellValue(m);
-
-                        } if(Integer.parseInt(order.getProducts()[i].getProductID())==(2222)){
-                            n++;
-                            cell.setCellValue(n);
-                        }
+                        Map<Integer,Integer> amount=order.getAmmount();
+                        int productNum=amount.get(pId);
+                        cell.setCellValue(productNum);
 
                     }else if(j==3){
-                        if(Integer.parseInt(order.getProducts()[i].getProductID())==(1111)){
-                        cell.setCellValue(Integer.parseInt(order.getProducts()[i].getProductPrice())*m);}
-                        if(Integer.parseInt(order.getProducts()[i].getProductID())==(2222)){
-                            cell.setCellValue(Integer.parseInt(order.getProducts()[i].getProductPrice())*n);
-                        }
+
                     }else if(j==4){
                         cell.setCellValue(order.getProducts()[i].getProductPrice());
                     }else if(j==5){

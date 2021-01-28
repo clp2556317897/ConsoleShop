@@ -1,4 +1,7 @@
 import java.io.InputStream;
+import java.rmi.MarshalledObject;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Test {
@@ -56,6 +59,10 @@ public class Test {
                             }
                             order.setProducts(products);//订单关联商品：实际上应该进行处理，把数组中为null的去除
                             //下订单（创建Excel）
+                            Map<Integer,Integer> ammount=new HashMap<Integer, Integer>();
+                            ammount.put(1111,2);
+                            ammount.put(2222,1);
+                            order.setAmmount(ammount);
 
                             CreateOrder.createOrder(order);
 

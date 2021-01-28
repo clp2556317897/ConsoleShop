@@ -1,9 +1,10 @@
 import java.util.Date;
+import java.util.Map;
 
 public class Order {
   private User user;
     private Product products[];
-    private int ammount;
+    private Map<Integer,Integer> ammount;
 
     public User getUser() {
         return user;
@@ -21,12 +22,12 @@ public class Order {
         this.products = products;
     }
 
-    public int getAmmount() {
+    public Map<Integer, Integer> getAmmount() {
         return ammount;
     }
 
-    public void setAmmount(int ammount) {
-        this.ammount = ammount;
+    public void setAmmount(Map<Integer, Integer> ammount){
+        this.ammount=ammount;
     }
 
     public float getTotalPay() {
