@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Test {
     static int count=0;
     static Product carts[]=new Product[3];//创建购物车
+
     public static void main(String[] args) throws ClassNotFoundException {
         boolean bo=true;
         while (bo) {
