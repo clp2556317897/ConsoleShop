@@ -1,3 +1,5 @@
+import org.omg.CORBA.ORB;
+
 import java.io.InputStream;
 import java.rmi.MarshalledObject;
 import java.util.HashMap;
@@ -7,7 +9,8 @@ import java.util.Scanner;
 public class Test {
     static int count=0;
     static Product carts[]=new Product[3];//创建购物车
-
+    static Map<Integer,Integer> ammount=new HashMap<Integer,Integer>();
+    static Map<Integer,Float> totalAmountPerProduct=new HashMap<Integer,Float>();
     public static void main(String[] args) throws ClassNotFoundException {
         boolean bo=true;
         while (bo) {
@@ -60,11 +63,12 @@ public class Test {
                             }
                             order.setProducts(products);//订单关联商品：实际上应该进行处理，把数组中为null的去除
                             //下订单（创建Excel）
-                            Map<Integer,Integer> ammount=new HashMap<Integer, Integer>();
-                            ammount.put(1111,2);
-                            ammount.put(2222,1);
-                            order.setAmmount(ammount);
-
+                            order.setAmmount(ammount);//关联购买数量
+                           for (Product product:products){
+                               int cou=ammount.get(Integer.parseInt(product.getProductID()));
+                               totalAmountPerProduct.put(Integer.parseInt(product.getProductID()),new Float(Integer.parseInt(product.getProductPrice())*cou));
+                           }
+                            order.setTotalAmountPerProduct(totalAmountPerProduct);//关联总价
                             CreateOrder.createOrder(order);
 
                         }
@@ -95,8 +99,13 @@ public class Test {
                     遍历数组
                      */
 
-        System.out.println("请输入商品ID，把该商品加入购物车：");
-        String pId = sc.next();
+        System.out.println("请输入商品ID以及购买数量,商品ID和数量用逗号隔开,例:1111,4, 把该商品加入购物车：");
+        String pInformation=sc.next();
+        String str[]=pInformation.split(",");
+        String pId=str[0];
+        String num=str[1];
+        ammount.put(Integer.parseInt(pId),Integer.parseInt(num));
+
         ReadproductExcel readProductExcel1 = new ReadproductExcel();
         inPro = null;
         inPro = Class.forName("Test").getResourceAsStream("/product.xlsx");//  /表示的就是classpath

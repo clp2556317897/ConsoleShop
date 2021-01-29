@@ -30,16 +30,18 @@ public class Order {
         this.ammount=ammount;
     }
 
-    public float getTotalPay() {
-        return totalPay;
-    }
 
-    public void setTotalPay(float totalPay) {
-        this.totalPay = totalPay;
-    }
 
     public float getActualPay() {
         return actualPay;
+    }
+
+    public Map<Integer, Float> getTotalAmountPerProduct() {
+        return totalAmountPerProduct;
+    }
+
+    public void setTotalAmountPerProduct(Map<Integer, Float> totalAmountPerProduct) {
+        this.totalAmountPerProduct = totalAmountPerProduct;
     }
 
     public void setActualPay(float actualPay) {
@@ -54,7 +56,7 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    private float totalPay;
+    private Map<Integer,Float> totalAmountPerProduct;//应付款
     private float actualPay;
     private Date orderDate;
 }

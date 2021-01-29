@@ -6,11 +6,13 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Map;
 
 public class CreateOrder {
-    public static String outputFile = "F:\\Orders.xls";
+    public static String outputFile = System.getProperty("user.dir")+ File.separator+"Orders.xls";
+    //System.getProperty("user.dir")+ File.separator+"Orders.xls"
     public static void createOrder(Order order) {
         try {
             // 创建新的Excel 工作簿
@@ -58,9 +60,11 @@ public class CreateOrder {
                         cell.setCellValue(productNum);
 
                     }else if(j==3){
-
+                        Map<Integer,Float> totalAmountPerProduct=order.getTotalAmountPerProduct();
+                        float productTotalpay=totalAmountPerProduct.get(pId);
+                        cell.setCellValue(productTotalpay);
                     }else if(j==4){
-                        cell.setCellValue(order.getProducts()[i].getProductPrice());
+
                     }else if(j==5){
 
                     }
